@@ -1,0 +1,29 @@
+{
+  "name": "@tamequest/account",
+  "version": "1.0.0",
+  "description": "Best practices for storing private keys in Algorand web applications",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TameQuest/Account.git"
+  },
+  "author": "grzracz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TameQuest/Account/issues"
+  },
+  "homepage": "https://github.com/TameQuest/Account#readme",
+  "dependencies": {
+    "@webcrypto/storage": "^3.1.0",
+    "algosdk": "^2.7.0",
+    "crypto-js": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.1",
+    "@types/node": "^20.9.4",
+    "typescript": "^5.3.2"
+  }
+}
