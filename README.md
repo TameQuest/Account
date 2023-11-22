@@ -12,21 +12,87 @@ It mainly implements [@webcrypto/storage](https://github.com/willgm/web-crypto-s
 
 Rekey/multisig not supported.
 
-## Example usage
+# Installation
 
-### Create account
+`yarn add @tamequest/account`
+
+or
+
+`npm i @tamequest/account`
+
+# Example usage
+
+### Imports
 
 ```
-async (
-    dispatch: (type: string, payload?: any) => void,
-    password: string,
-    account: algosdk.Account
-  ) => {
-    if (!(await isPasswordSet())) {
-      await setPassword(password)
-      if (await verifyPassword(password)) {
-        await signIn(dispatch, await addAccount(account))
+import {
+  addAccount,
+  createBackup,
+  getAddress,
+  isPasswordSet,
+  lock,
+  setPassword,
+  signTransactions,
+  verifyPassword
+} from '@tamequest/account'
+```
+
+### Add account & password hash to storage
+
+```
+async function addAccount(
+  password: string,
+  account: algosdk.Account
+): {
+  if (!(await isPasswordSet())) {
+    await setPassword(password)
+    if (await verifyPassword(password)) {
+      const accountAddress = await addAccount(account)
+      if (accountAddress) {
+        // ...perform sign in
       }
     }
   }
+}
 ```
+
+### Verify user password on sign in
+
+```
+async function signIn(
+  password: string
+): {
+  if (await verifyPassword(password)) {
+    const accountAddress = await getAddress()
+    if (accountAddress) {
+        // ...perform sign in
+    }
+  } else {
+    // ...inform user password is invalid
+  }
+}
+```
+
+### Sign out
+
+```
+lock()
+```
+
+### Create backup
+
+```
+// prompt download of below returned text to a file
+await createBackup(password)
+```
+
+### Sign transactions
+
+```
+// transactions: algosdk.Transaction[]
+await signTransactions(transactions)
+```
+
+# Disclaimer
+
+The code is provided as-is, with no guarantees of correctness or security.
