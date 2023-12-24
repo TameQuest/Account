@@ -20,6 +20,10 @@ async function setLocalStorage<T>(name: string, value: T): Promise<void> {
   localStorage.setItem(name, JSON.stringify(value))
 }
 
+async function removeLocalStorage(name: string): Promise<void> {
+  localStorage.removeItem(name)
+}
+
 async function getLocalStorage<T>(name: string): Promise<T | null> {
   try {
     const storedValue: T = JSON.parse(localStorage.getItem(name) || 'err')
@@ -107,6 +111,10 @@ export async function verifyPassword(password: string): Promise<boolean> {
   return false
 }
 
+export async function clearPassword(): Promise<void> {
+  await removeLocalStorage(StorageKeys.passwordHash)
+}
+
 export async function getAddress(): Promise<string | null> {
   return await get(StorageKeys.address)
 }
@@ -132,6 +140,8 @@ export async function removeAccount(): Promise<void> {
     await remove(StorageKeys.address)
   }
 }
+
+
 
 export async function lock(): Promise<void> {
   storage = null
