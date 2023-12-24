@@ -141,8 +141,6 @@ export async function removeAccount(): Promise<void> {
   }
 }
 
-
-
 export async function lock(): Promise<void> {
   storage = null
 }
