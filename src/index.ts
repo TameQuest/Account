@@ -2,6 +2,8 @@ import CryptoJS from 'crypto-js'
 import { CryptoStorage } from '@webcrypto/storage'
 import algosdk from 'algosdk'
 import { Buffer } from 'buffer'
+import { decode, generateHash } from '@webcrypto/tools'
+import { deleteDB } from 'idb'
 
 let storage: CryptoStorage | null = null
 
@@ -111,7 +113,8 @@ export async function verifyPassword(password: string): Promise<boolean> {
   return false
 }
 
-export async function clearPassword(): Promise<void> {
+export async function clearData(): Promise<void> {
+  await deleteDB(decode(await generateHash('default-key-value-db')))
   await removeLocalStorage(StorageKeys.passwordHash)
 }
 
