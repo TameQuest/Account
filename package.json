@@ -1,6 +1,6 @@
 {
   "name": "@tamequest/account",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Best practices for storing private keys in Algorand web applications",
   "main": "dist/index.js",
   "scripts": {
